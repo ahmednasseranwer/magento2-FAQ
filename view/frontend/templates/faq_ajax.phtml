@@ -1,9 +1,10 @@
-<?php $showGroup = $block->getConfig('faqtab/design/showgroup') ?>
-<?php $showGroupTitle = $block->getConfig('faqtab/design/showgrouptitle') ?>
-<?php $faqGroupCollection = $block->getFaqGroupCollection() ?>
-<?php $faqCollection = $block->getFaqCollection($block->getGroupId()) ?>
-<?php $group = $block->getGroupById($block->getGroupId()); ?>
-<?php if ($showGroupTitle) : ?>
+<?php
+/** @var $block \Prince\Faq\Block\Index\Index */
+$faqGroupCollection = $block->getFaqGroupCollection();
+$faqCollection = $block->getFaqCollection($block->getGroupId());
+$group = $block->getGroupById($block->getGroupId());
+?>
+<?php if ($block->isShowGroupTitle()) : ?>
     <div class="group-title" id="group<?php /* @noEscape */ echo $group->getFaqgroupId(); ?>">
         <i></i><?php /* @noEscape */ echo $group->getGroupName(); ?>
     </div>
@@ -17,7 +18,5 @@
                 <p><?php /* @noEscape */ echo $block->filterOutputHtml($faq->getContent()); ?></p>
             </div>
         <?php endforeach; ?>
-    <?php else : ?>
-        <div><?php /* @noEscape */ echo __('No FAQ available'); ?></div>
     <?php endif; ?>
 </div>
